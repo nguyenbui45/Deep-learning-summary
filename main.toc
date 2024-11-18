@@ -1,0 +1,44 @@
+\contentsline {chapter}{\numberline {1}Neural network}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Foward and Backward pass}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Forward Pass}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Backward pass (Backpropagation)}{4}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Optimizer}{6}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Gradient Descent and its variants}{6}{subsection.1.2.1}%
+\contentsline {subsubsection}{Stochastic Gradient Descent (SGD)}{6}{subsection.1.2.1}%
+\contentsline {subsubsection}{Batch Gradient Descent}{6}{equation.1.2.10}%
+\contentsline {subsubsection}{Mini-Batch Gradient Descent}{7}{equation.1.2.12}%
+\contentsline {subsubsection}{Stochastic Gradient Descent with Momentum}{7}{equation.1.2.13}%
+\contentsline {subsection}{\numberline {1.2.2}Nesterov Accelerated Gradient}{8}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Adaptive Gradient Algorithm (Adagrad)}{9}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Root Mean Square Propagation (RMSProp)}{9}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Adaptive Moment Estimation (Adam) and its variants}{9}{subsection.1.2.5}%
+\contentsline {subsubsection}{Adaptive Moment Estimation (Adam)}{9}{subsection.1.2.5}%
+\contentsline {subsubsection}{Adam with Weight Decay (AdamW)}{9}{subsection.1.2.5}%
+\contentsline {subsubsection}{AdamMax}{9}{subsection.1.2.5}%
+\contentsline {subsubsection}{Nesterov-accelerated Adam (Nadam)}{9}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Activation function}{9}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Sigmoid function}{9}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Softmax function}{9}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Hyperbolic Tangent (Tanh) function}{10}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Rectifier Unit (ReLU) function}{10}{subsection.1.3.4}%
+\contentsline {subsection}{\numberline {1.3.5}Leaky Rectifier Unit (LeakyReLU) function}{11}{subsection.1.3.5}%
+\contentsline {subsection}{\numberline {1.3.6}Exponential Linear Unit (ELU) function}{11}{subsection.1.3.6}%
+\contentsline {subsection}{\numberline {1.3.7}Gaussian Error Linear Unit (GELU) function}{12}{subsection.1.3.7}%
+\contentsline {subsection}{\numberline {1.3.8}Swish function}{12}{subsection.1.3.8}%
+\contentsline {subsection}{\numberline {1.3.9}Maxout function}{13}{subsection.1.3.9}%
+\contentsline {section}{\numberline {1.4}Loss function}{13}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Mean Squared Error (MSE) loss}{13}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Mean Absolute Error (MSA) loss}{13}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Huber loss}{14}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Cross-Entropy loss and its variants}{14}{subsection.1.4.4}%
+\contentsline {subsubsection}{Cross-Entropy loss}{14}{subsection.1.4.4}%
+\contentsline {subsubsection}{Categorical Cross-Entropy loss}{14}{subsection.1.4.4}%
+\contentsline {subsubsection}{Sparse Categorical Cross-Entropy loss}{14}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Dice loss}{14}{subsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.4.6}Focal loss}{14}{subsection.1.4.6}%
+\contentsline {subsection}{\numberline {1.4.7}Triplet loss}{14}{subsection.1.4.7}%
+\contentsline {subsection}{\numberline {1.4.8}Tversky loss}{14}{subsection.1.4.8}%
+\contentsline {section}{\numberline {1.5}Proved of equation in backpropagation}{14}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Convolutional Neural Network (CNN)}{15}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Convolutional Neural Network}{15}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Vectorized convolution by Im2col and col2im}{15}{subsection.2.1.1}%

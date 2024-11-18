@@ -1,0 +1,85 @@
+\documentclass[hidelink,12pt]{report}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots} % plot math function
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{authblk} % for author import
+\usepackage{soul}% adjust underline gap
+\usepackage{float} % float position
+\usepackage[backend=biber,style=numeric]{biblatex} % add reference .bib
+
+\addbibresource{ref.bib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}  % Load hyperref for clickable links
+\usepackage{fancyhdr} % for footer
+\usepackage{geometry} % change the length and layout of different elements such as the paper size, margins, footnote, header, orientation
+\usepackage{titlesec}  % for title displayment
+\fancyhead[LO,RE]{DEEPLEARNING SUMMARY}
+\fancyhead[RO,LE]{Lab \thechapter}
+\renewcommand{\footrulewidth}{0.4pt} % add line at footer
+\fancyfoot[CO,CE]{\thepage}
+%\fancyfoot[LO,RE]{Lecturer: Zuheng Ming}
+\fancyfoot[RO,LE]{BUI Trung-Nguyen}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% define command for function ploting
+\newcommand{\sigmoid}{1/(1 + exp(-x))}
+
+
+
+% setting the template
+\usepackage[bottom]{footmisc}
+\geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+
+
+\author{BUI TRUNG NGUYEN}
+\affil{Sorbonne Paris Nord University}
+\title{Deeplearning summary}
+
+
+
+\begin{document}
+\maketitle
+\pagestyle{fancy}
+\tableofcontents
+\newpage
+
+\chapter{Neural network}
+\input{chapters/chapter1}
+
+\chapter{Convolutional Neural Network (CNN)}
+\input{chapters/chapter2}
+
+\end{document}
