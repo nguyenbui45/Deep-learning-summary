@@ -11,6 +11,7 @@
 \usepackage{float} % float position
 \usepackage[backend=biber,style=numeric]{biblatex} % add reference .bib
 
+\pgfplotsset{compat=1.18}
 \addbibresource{ref.bib}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}  % Load hyperref for clickable links
 \usepackage{fancyhdr} % for footer
@@ -50,7 +51,7 @@
 \lstset{style=mystyle}
 
 % define command for function ploting
-\newcommand{\sigmoid}{1/(1 + exp(-x))}
+\newcommand{\sigmoid}{1/ (1 + exp (-x))}
 
 
 
@@ -82,4 +83,6 @@
 \chapter{Convolutional Neural Network (CNN)}
 \input{chapters/chapter2}
 
+
+%\printbibliography
 \end{document}

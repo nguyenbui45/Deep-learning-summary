@@ -139,13 +139,13 @@ The weighted input to neuron $z^{k}_{j}$ is passed through an activation functio
 \begin{equation}\label{eq:neuron_output}
 	a^{l}_{j} = \sigma\left(\Sigma_{k} w^{l}_{kj}a^{l-1}_{k} + b^{l}_{j}\right)
 \end{equation}
-
+u
 In fact, this representation \eqref{eq:neuron_output} only well describe the output of a single neuron. In practice, we would like utilize the power of linear algebra in order to avoid looping so many time to calculate for each neuron in the layer. Because of this, we would like to rewrite the \eqref{eq:neuron_output} in the matrix form:
 \begin{equation}\label{eq:neuron_output_matrix_form}
 	a^{l} = \sigma\left(w^{l}a^{l-1} + b^{l}\right)
 \end{equation}
 \textbf{Remark 1:}the activation function for \eqref{eq:neuron_output_matrix_form} is \textbf{element-wise} function.\newline\noindent
-\textbf{Remark 2:}some textbooks may write \eqref{eq:neuron_output_matrix_form} as $a^{l} = \sigma\left((w^{l})^{T}a^{l-1} + b^{l}\right)$ in which the weight matrix $w^{l}$ is transposed.This unsynchronization is dued to the difference in notation of the weight matrix component $w^{l}_{jk}$ in \eqref{eq:neuron_output} where we use the inverse order of relationship between 2 connected neurons, e.g the "suppose" to be correct description for this parameter is "the weight between neuron $k^{th}$-layer $(l-1)^{th}$ connects to neuron $j^{th}$-layer $l^{th}$", so the precise notation should have been \textbf{$w^{l}_{kj}$}. But once we use the reverse notation, it allows us to get rid of the transpose operation for matrix representation!
+\textbf{Remark 2:}some textbooks may write \eqref{eq:neuron_output_matrix_form} as $a^{l} = \sigma\left((w^{l})^{T}a^{l-1} + b^{l}\right)$ in which the weight matrix $w^{l}$ is transposed.This unsynchronization is dued to the difference in notation of the weight matrix component $w^{l}_{jk}$ in \eqref{eq:neuron_output} where we use the inverse order of relationship between 2 connected neurons, e.g the ``suppose'' to be correct description for this parameter is ``the weight between neuron $k^{th}$-layer $(l-1)^{th}$ connects to neuron $j^{th}$-layer $l^{th}$'', so the precise notation should have been \textbf{$w^{l}_{kj}$}. But once we use the reverse notation, it allows us to get rid of the transpose operation for matrix representation!
 
 \begin{figure}[H]
 \begin{tikzpicture}  
@@ -279,7 +279,7 @@ or in matrix form:
     \delta^{L} = \nabla_{a} \mathcal{C}\odot \sigma^{'}(z^{L})
 \end{equation}
 where $\frac{\partial \mathcal{C}}{\partial a^{L}_{j}}$ indicates how fast the cost function changes w.r.t the output layer activation of neuron \textit{$j^{th}$}
-and $\sigma^{'}(z^{L}_{j})$ measures the rate of change of activation function $\sigma$ w.r.t the $z^{L}_{j}$. In the matrix form, $\odot$ is called Hadamard product. The result of $u \odt v$ is the element-wise product $u_{i}$ and $v_{i}$ of $u$ and $v$ respectively. Moreover, $\nabla$ is called "nabla" - the notation for vector differential operation.\newline
+and $\sigma^{'}(z^{L}_{j})$ measures the rate of change of activation function $\sigma$ w.r.t the $z^{L}_{j}$. In the matrix form, $\odot$ is called Hadamard product. The result of $u \odot v$ is the element-wise product $u_{i}$ and $v_{i}$ of $u$ and $v$ respectively. Moreover, $\nabla$ is called ``nabla'' - the notation for vector differential operation.\newline
 \newline\noindent
 \textbf{Interpretation:} this factor allows us to know the dependency of the cost function $C$ on the output neuron $j^{th}$. If the neuron $j^{th}$ of the output layer doesn't contribute much to the cost function result, then the error $\delta^{L}$ should be small\newline
 \newline
@@ -292,7 +292,7 @@ For example: $\mathcal{C}$ is MSE function $\mathcal{C} = || a^{L} - y||_{2}$ th
 \end{equation}
 or in matrix form:
 \begin{equation} \label{eq:errorhidden}
-	\delta^{l} = ((w^{l+1})^{T}\delta^{l+1}) \odot \sigma^{'}(z^{l})
+	\delta^{l} = ((w^{l+1})^{T} \delta^{l+1}) \odot \sigma^{'}(z^{l})
 \end{equation}
 \begin{figure}[H] 
 \begin{tikzpicture}
@@ -383,26 +383,26 @@ or in matrix form:
 \caption{Calculating the error of hidden layers}
 \label{fig:errorlayer}
 \end{figure}
-where $\delta^{l+1}$,$w^{l+1}$ are the error and weight terms of the next layer or the right next layer according to the figure \ref{fig:errorlayer}\newline \noindent
-\textbf{Interpretation:} initially once we compute the \eqref{eq:errorhidden}, we then have enough "inertia" to go backward from the output layer back to input layer direction in order to calculate the error term for each hidden layer.
+where $\delta^{l+1}$,$w^{l+1}$ are the error and weight terms of the next layer or the right next layer according to the figure~\ref{fig:errorlayer}\newline \noindent
+\textbf{Interpretation:} initially once we compute the~\eqref{eq:errorhidden}, we then have enough ``inertia' to go backward from the output layer back to input layer direction in order to calculate the error term for each hidden layer.
 
-\vspace{1.5cm} \noindent
-Now with the support from \eqref{eq:erroroutput} and \eqref{eq:errorhidden}, we are confident to say that the goal of backpropagation is feasible to achieve. The formulas to estimate the rate of change of the loss function $C$ w.r.t the weight and bias of each layer are:\newline \noindent
+\vspace{0.2cm} \noindent
+Now with the support from \eqref{eq:erroroutput} and~\eqref{eq:errorhidden}, we are confident to say that the goal of backpropagation is feasible to achieve. The formulas to estimate the rate of change of the loss function $C$ w.r.t the weight and bias of each layer are:\newline \noindent
 \newline \noindent
 \textit{Calculate the rate of change of the cost w.r.t any bias in the network}
 \begin{equation}\label{eq:errorbias}
     \frac{\partial \mathcal{C}}{\partial b^{l}_{j}} = \delta^{l}_{j}
 \end{equation}
-The equation is straightforward ! The rate of change of loss fucntion w.r.t the bias is \underline{\smash{the error of each layer}}.
+The equation is straightforward! The rate of change of loss fucntion w.r.t the bias is \underline{\smash{the error of each layer}}.
 
 \vspace{1.5cm}\noindent
 \textit{Calculate the rate of change of the cost w.r.t any weight in the network}
-\begin{equation}\label{eq:errorweight}
-    \frac{\partial \mathcal{C}}{\partial w^{l}_{jk}} = a^{l-1}_{k} \delta^{l}_{j}
+\begin{equation}%\label{eq:errorweight}
+    \frac{\partial \mathcal{C}}{\partial w^{l}_{jk}} = a^{l-1}_{k} \delta^{l}_{j} \label{eq:errorweight}
 \end{equation}
 the rate of change of the cost w.r.t the weight is depended on the activation output of neuron $k^{th}$ of layer $(l-1)^{th}$ and the error term of neuron $l^{th}$ of layer $l^{th}$ itself.\newline\noindent
 \newline\noindent
-\textbf{Evaluation: What can we perceive from the result of \eqref{eq:errorbias} and \eqref{eq:errorweight} ?}\newline\noindent
+\textbf{Evaluation: What can we perceive from the result of \eqref{eq:errorbias} and \eqref{eq:errorweight}?}\newline\noindent
 \textbf{Answer:} the $\frac{\partial C}{\partial w}$ is \underline{\smash{small}} meaning that the weight tend to update their weight \underline{\smash{slower}}. There are factors that can cause this result: (1) when the activation ouput $a^{l-1}_{k} \approx 0$, (2) when the error $\delta^{l}_{j} \approx 0$\newline \noindent
 For $1^{th}$ factor to the design of activation function that can force the weight input to low value.\newline\noindent
 For $2^{th}$ factor we must go backward to the error of output layer at \eqref{eq:erroroutput}. When the rate of change of activation of output layer $\sigma^{'}(z^{L}_{j})$ is small, it means that the output neuron had stepped to saturated region where $z^{L}_{J}$ is not likely to vary its value. Then the error of output neuron $j^{th}$ is small and makes the error term $\delta^{l}_{k}$ is small as well according to \eqref{eq:errorhidden}.\newline \noindent
@@ -410,7 +410,6 @@ The explaination for the bias gradient hold the same idea as above. The phenomen
 \newline\noindent
 \section{Optimizer}
 \subsection{Gradient Descent and its variants}
-
 
 \subsubsection{Stochastic Gradient Descent (SGD)}
 This is the most naive way to update the weight matrix as this optimizer repeats the update sequentially for every 1 input sample.  
@@ -430,6 +429,7 @@ Then the batch GD becomes:
 \end{equation}
 Remind that we will implement vectorization for these formula, so if the dataset has A samples, then the dimension of $\nabla_{w^{l}}C$ matrix is (A,N,M) but the dimension of $w^{l}$ is still (N,M) (N,M are the height and width of weight matrix of each layer).\newline\noindent
 One reason that batch GD is not so commonly used is because the size of dataset is usually very large nowadays such that it is no longer economical to upgrade the hardware for loading the entire dataset. Moreover, the efficiency of this optimizer is not always assured since the weight matrix is updated only 1 time which may not bring the best converged result for the model.
+
 \subsubsection{Mini-Batch Gradient Descent}
 Mini-Batch has the same idea as batch GD except the fact this strategy split the dataset into many batchs and feed them to the model one-by-one. That means, the weight will be updated more frequently and still be able to ultize the parallelization computational power of the hardware. Given a dataset that is split into B batchs, each with C samples, then the formula to update the weight for 1 batch is:
 \begin{equation}
@@ -437,9 +437,9 @@ Mini-Batch has the same idea as batch GD except the fact this strategy split the
 \end{equation}
 Mini-batch is one of the widely used strategy for optimization the neural network.
 \subsubsection{Stochastic Gradient Descent with Momentum}
-The SGD with momentum offers a velocity terms to speed up the optimizating step, especially when the neural network model get stuck at a local minimum. In that case, if the \textit{learning rate} is set small, the model will accept the local minimum as general solution hence unable to optimize the model. On the contrary, if we would like to get rid of this aannoying issue by simply setting the \textit{learning rate} to a bigger value, then probally we can accidentally "jump" over the global minimum. These problems are indicated in figure \ref{fig:issueLR}.
+The SGD with momentum offers a velocity terms to speed up the optimizating step, especially when the neural network model get stuck at a local minimum. In that case, if the \textit{learning rate} is set small, the model will accept the local minimum as general solution hence unable to optimize the model. On the contrary, if we would like to get rid of this aannoying issue by simply setting the \textit{learning rate} to a bigger value, then probally we can accidentally ``jump'' over the global minimum. These problems are indicated in figure \ref{fig:issueLR}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \fbox{
     \begin{tikzpicture}
         \draw[thick] (-1,8) 
@@ -495,7 +495,7 @@ Hence a new variable $v$ which defines the velocity (speed and direction) for th
         w^{l} &= w^{l} + v\\
     \end{aligned}
 \end{equation}
-where $\alpha \in [0,1)$ is hyperparameter which controls the rate of previous velocity.
+where $\alpha \in \left[0,1\right)$ is hyperparameter which controls the rate of previous velocity.
 \subsection{Nesterov Accelerated Gradient}
 Given a dataset that is split into B batchs, each with C samples, then the formula to update the weight for 1 batch is:
 \begin{equation}
@@ -519,7 +519,7 @@ Given a dataset that is split into B batchs, each with C samples, then the formu
 \subsubsection{Nesterov-accelerated Adam (Nadam)}
 
 
-\section{Activation function}
+\section{Activation function} 
 
 \subsection{Sigmoid function}
 \begin{equation}
@@ -545,7 +545,8 @@ Given a dataset that is split into B batchs, each with C samples, then the formu
         % Plot the sigmoid function
         \addplot[blue, thick] {\sigmoid};
     \end{axis}
-\end{tikzpicture} }
+\end{tikzpicture}
+    }
     \centering
     \caption{Sigmoid function}
 \end{figure}
@@ -574,7 +575,8 @@ Given a dataset that is split into B batchs, each with C samples, then the formu
         \addplot[blue, thick] {exp(x) / (exp(x) + exp(0) + exp(-2))};
 
     \end{axis}
-\end{tikzpicture} }
+\end{tikzpicture}
+    }
 \centering
     \caption{Softmax function}
 \end{figure}
@@ -708,7 +710,7 @@ where $\alpha > 0$
          =& \frac{x}{2} \left(1 + erf\left(\frac{x}{\sqrt{2}}\right) \right)
     \end{aligned}
 \end{equation}
-where $erf()$ function is...
+where $erf()$ function is
 
 \begin{figure}[H]
     \fbox{
@@ -767,7 +769,7 @@ where $\sigma()$ function is \textit{sigmoid} function
 \end{figure}
 \subsection{Maxout function}
 \begin{equation}
-    f(x) = MAX(w^{T}_{1}x + b_{1},w^{T}_{2}x + b_{2},...,w^{T}_{k}x + b_{k})
+    f(x) = MAX(w^{T}_{1}x + b_{1},w^{T}_{2}x + b_{2},\ldots,w^{T}_{k}x + b_{k})
 \end{equation}
 
 \begin{figure}[H]
@@ -812,25 +814,24 @@ where $\sigma()$ function is \textit{sigmoid} function
 \subsection{Huber loss}
 \begin{equation}
     \mathcal{L}_{\delta}(x,\hat{x}) = \begin{cases}
-        0.5(x - \hat{x})^{2} & \text{if } |x-\hat{x}| < \delta\\
+        0.5{(x - \hat{x})}^{2} & \text{if } |x-\hat{x}| < \delta\\
         \delta (|x-\hat{x}| - 0.5\delta)& \text{otherwise}
     \end{cases}
 \end{equation}
 \subsection{Cross-Entropy loss and its variants}
-
+d
 \subsubsection{Cross-Entropy loss}
-
+d
 \subsubsection{Categorical Cross-Entropy loss}
-
+d
 \subsubsection{Sparse Categorical Cross-Entropy loss}
-
+d
 \subsection{Dice loss}
-
+d
 \subsection{Focal loss}
-
+d
 \subsection{Triplet loss}
-
+d
 \subsection{Tversky loss}
-
+d
 \section{Proved of equation in backpropagation}
-
