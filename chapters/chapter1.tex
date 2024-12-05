@@ -800,36 +800,124 @@ where $\sigma()$ function is \textit{sigmoid} function
 \subsection{Mean Squared Error (MSE) loss}
 \begin{equation}
     \begin{aligned}
-    \mathcal{L}(x,\hat{x}) =& || x - \hat{x} ||_{2}\\
-                           =& \frac{1}{N}\sum^{N}_{i} (x_{i} - \hat{x}_{i})^{2} 
+    \mathcal{L}(y,\hat{y}) =& || y - \hat{y} ||_{2}\\
+                           =& \frac{1}{N}\sum^{N}_{i} (y_{i} - \hat{y}_{i})^{2} 
     \end{aligned}
 \end{equation}
 \subsection{Mean Absolute Error (MSA) loss}
 \begin{equation}
     \begin{aligned}
-    \mathcal{L}(x,\hat{x}) =& || x - \hat{x} ||\\
-                           =& \frac{1}{N}\sum^{N}_{i} (x_{i} - \hat{x}_{i}) 
+    \mathcal{L}(y,\hat{y}) =& || y - \hat{y} ||\\
+                           =& \frac{1}{N}\sum^{N}_{i} (y_{i} - \hat{y}_{i}) 
     \end{aligned}
 \end{equation}
 \subsection{Huber loss}
 \begin{equation}
-    \mathcal{L}_{\delta}(x,\hat{x}) = \begin{cases}
-        0.5{(x - \hat{x})}^{2} & \text{if } |x-\hat{x}| < \delta\\
-        \delta (|x-\hat{x}| - 0.5\delta)& \text{otherwise}
+    \mathcal{L}_{\delta}(y,\hat{y}) = \begin{cases}
+        0.5{(y - \hat{y})}^{2} & \text{if } |y-\hat{y}| < \delta\\
+        \delta (|y-\hat{y}| - 0.5\delta)& \text{otherwise}
     \end{cases}
 \end{equation}
-\subsection{Cross-Entropy loss and its variants}
-d
-\subsubsection{Cross-Entropy loss}
-d
-\subsubsection{Categorical Cross-Entropy loss}
-d
-\subsubsection{Sparse Categorical Cross-Entropy loss}
-d
+\subsection{Cross-Entropy loss}
+Cross-Entropy loss is widely used for classification problem. The name of this loss function associates to terminology in \textit{information theory} "Entropy" in which it measures the average information per symbol with the given source. In particular, the smaller entropy is, the more infomation is provided by the source. The idea of Cross-Entropy function implies the same manner as we would like to minimize the value of Cross-Entropy to optimize the model. Given the label $\hat{y}$ formatted in binary values {0,1} and prediction $p(y)$ formatted as the probability output of softmax function, the Cross-Entropy is defined by: 
+\begin{equation}
+    \label{eq:cross}
+\mathcal{L}(y,\hat{y}) = -\frac{1}{N}\sum_{i=1}^{N}\hat{y}_{i}log(p(y_{i}))
+\end{equation}
+Althought the Cross-Entropy formula is transparent enough, it is better to check out an example to see how this loss function is explicitly calculated.\par
+For example, we assume that the in 1 mini-batche has 4 samples corresponding to 4 predictions. There are 10 different classes to classify in this dataset so we can see in the code~\ref{lst:cross},e.g the \textbf{predicts} variable is a (4,10) matrix with 4 predictions consist of logits represent for 10 classes classification. In order to obtain the probabilities for each class to guess the sample input's class, we need to feed these logits to the softmax function (refer~\ref{fig:softmax}), in which the total sum of probabilities for 10 classes is 1. Then the way equation~\ref{eq:cross} is applied can be interpreted by taking the labels\footnote{normally in classification, we mark the ground truth for the sample in either integer or one-hot encoding. In the code~\ref{lst:cross}, we use integer} to map the corresponding probability of the softmax output, then take the log and the mean of them. Remark that we can also transform the integer labels to the one-hot encoding style but it would take $4\times10=40$ vectors to implement it.
+
+\lstinputlisting[language=Python,caption={Example for calculating cross entropy loss},label={lst:cross}]{codes/crossentropy.py}
+\begin{figure}[H]
+    \includegraphics[width=0.75\textwidth]{images/cross1.png}
+    \centering
+    \caption{The \textbf{predicts} mini-batch has 4 samples, each prediction has 10 classes. This figure indicates the predictions after applying softmax function which are stored in \textbf{output\_probs} variables.}
+    \label{fig:softmax}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.25\textwidth]{images/cross2.png}
+    \centering
+    \caption{Ground truth index by the \textbf{labels}}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.25\textwidth]{images/cross3.png}
+    \centering
+    \caption{Match the probabilities with the ground truth indeces by \textbf{true\_class\_probs}. Remind that when the obtained values are also the ones that have the highest probability then they are the correct prediction, elsewhere they would be the failed prediction.}
+\end{figure}
+
+\begin{figure}[H]
+    \includegraphics[width=0.5\textwidth]{images/cross4.png}
+    \centering
+    \caption{Cross entropy loss}
+\end{figure}
+
+\noindent
+\textbf{Cross-Entropy in Imbalance dataset}\newline \noindent
+In some extreme cases, there exists a class that dominate others in terms of quantity within a dataset, the loss function will behave biasly toward the one who got the most direct influence to the numeric result but not the desired goal that we want, i.e in tumor classification, normally, the benign case will be much more popular than malignant case but the prediction must not gravitate toward predicting all the inputs as benign although doing so will yield a good evaluation metric (explicit for accuracy). Therefore, in order to leverage the Cross-Entropy loss in Imbalance data, we usually multiply a weight term to penalize more the minor class and relief the impact if the major class got the correct prediction.
+\begin{equation}
+    \label{eq:cross}
+\mathcal{L}(y,\hat{y}) = -\frac{1}{N}\sum_{i=1}^{N}\textbf{w}\hat{y}_{i}log(p(y_{i}))
+\end{equation}
+
+where $\textbf{w}$ is the weight term corresponding to each class, in which:
+\begin{equation}
+    \textbf{w} = 
+    \begin{cases}
+        \frac{\text{num\_major}}{\text{num\_total}} & \text{for major class}\\
+        \frac{\text{num\_minor}}{\text{num\_total}} & \text{for minor class}\\
+    \end{cases}
+\end{equation}
+
 \subsection{Dice loss}
-d
+For Dice loss:
+\begin{equation}
+    \label{eq:dice}
+    \mathcal{L}(y,\hat{y}) = 1 - \frac{1}{N}\sum_{i=1}^{N} \frac{2\times\sum (y_{i}\times \hat{y}_{i})}{\sum(y_{i}) + \sum(\hat{y}_{i}) + \epsilon}
+\end{equation}
+where $\epsilon$ uses to avoid null denominator. In the numerator is the operation \textbf{intersect} the predictions and ground truths while at the denominator is the \textbf{union} of predictions and ground truths. If we take account of the part after the substraction by 1, we call this term as \textbf{Dice coefficient}. The advantage of Dice loss is that it \ul{focus on checking over the perfomance of classifier if the predictions and true labels are overlapped}. Moreover, Dice loss doesn't be affected much by the imbalance dataset since the denumerator term has already normalized the numerator term, in which for example the background class dominant the whole image, then the prediction likely to bias over the major class (which is background in this case) will not make a great impact the overal Dice loss since the union of predictions and true labels is big as well. On the other hand, if a prediction of a minor class is excellent then its contribution to the Dice loss is as big as major classes.\newline
+
+
+\noindent
+Example: A $200\times200$ medical image is used to predict the tumor of human brain. The ground truth has 3500 pixels of background class and 500 pixels of tumor class. The prediction yield 3700 pixels of background class (which 3400 are True Positive) and 300 pixels of tumor class (which 250 are True Positive). Mark background class as $c=0$ and tumor as $c=1$ then the Dice loss given by equation~\ref{eq:dice} can be calculated as follow:\newline
+\begin{align*}
+\text{Dice coef }(c=0) &= \frac{2\times3400}{3500+3700} = 0.944 \\ 
+\\
+\text{Dice coef }(c=1) &= \frac{2\times250}{500+300} = 0.625 \\
+\\
+\Rightarrow\text{Dice loss} &= 1 - \frac{0.944 + 0.625}{2} = 0.2155 
+\end{align*}
+
+\lstinputlisting[language=Python,caption={Dice loss calculating},label={lst:dice}]{codes/dice.py}
 \subsection{Focal loss}
-d
+
+First, with the estimated probability of the model for the class $y=1$, we denote the general case for any $y \in{0,1}$ as follow:
+\begin{equation}
+    p_{t} = 
+    \begin{cases}
+    p &, \text{if }\hat{y}=1\\
+    1-p &, \text{if } \hat{y}=0 
+    \end{cases}
+\end{equation}
+Focal loss is then defined by:
+\begin{equation}
+    \mathcal{L}(p_{t}) = -(1-p_{t})^{\gamma}log(p_{t})
+\end{equation}
+where $(1-p_{t})^{\gamma}$ is the modulating factor, $\gamma \geq0$ is the focusing parameter.\newline \noindent
+
+The design of Focal loss is relatively associate with the cross-entropy loss function in case of imbalanced dataset Cross-Entropy as 2 ideas both address the imbalance by multiply the Cross-Entropy with a weight factor (it's the modulating factor in Focal loss) but the Focal loss proposed 2 properties:
+\begin{itemize}
+    \item When the $\hat{y}$ is misclassified, $p_{t}$ can't be maximum but rather to be small thus lead to $(1-p_{t})$ near 1 $\Rightarrow$ The loss is unaffected
+    \item For easy example, the $p_{t}\rightarrow1$, therefore $\gamma \in [0,5]$ will down-weighted the $(1-p_{t})^{\gamma}$ and reduce the loss contribution for easy case
+\end{itemize}
+For instance: an easy example has $p_{t}=0.9$; we set $\gamma=2$, then the focal loss is: $l_{f} = -1(1-0.9)^{2}log(0.9)=0.000475$ $<$ $l_{ce} = -log(0.9)=0.04575$. It's 100 times scale down\newline
+
+while a misclassified example has $p_{t}=0.4$; we set $\gamma=2$, then the focal loss is: $l_{f} = -1(1-0.4)^{2}log(0.4)=0.1432$ $<$ $l_{ce} = -log(0.4)=0.3979$. It's 4 times scale down.\newline
+
+We observe that for the hard case, there is more room for the loss to continously optimize (from $0.1432 \rightarrow 0$) compares to the easy case (from $0.000475 \rightarrow 0$) during backpropagation process. Or it can be understood that the gradient yielded from a very small loss will barely makes a significant update to the weight regarding the easy examples. The illustrating code for focal loss is presented at Code~\ref{lst:focal}
+
+\lstinputlisting[language=Python,caption={Focal loss calculating},label={lst:focal}]{codes/focal.py}
 \subsection{Triplet loss}
 d
 \subsection{Tversky loss}

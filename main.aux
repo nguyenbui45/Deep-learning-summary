@@ -59,29 +59,40 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4.1}Mean Squared Error (MSE) loss}{13}{subsection.1.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4.2}Mean Absolute Error (MSA) loss}{13}{subsection.1.4.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4.3}Huber loss}{13}{subsection.1.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}Cross-Entropy loss and its variants}{13}{subsection.1.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Cross-Entropy loss}{13}{subsection.1.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Categorical Cross-Entropy loss}{13}{subsection.1.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Sparse Categorical Cross-Entropy loss}{13}{subsection.1.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.5}Dice loss}{14}{subsection.1.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.6}Focal loss}{14}{subsection.1.4.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.7}Triplet loss}{14}{subsection.1.4.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.8}Tversky loss}{14}{subsection.1.4.8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.5}Proved of equation in backpropagation}{14}{section.1.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {2}Convolutional Neural Network (CNN)}{15}{chapter.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.4}Cross-Entropy loss}{13}{subsection.1.4.4}\protected@file@percent }
+\newlabel{eq:cross}{{1.28}{13}{Cross-Entropy loss}{equation.1.4.28}{}}
+\newlabel{lst:cross}{{1.1}{14}{Example for calculating cross entropy loss}{lstlisting.1.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1.1}Example for calculating cross entropy loss}{14}{lstlisting.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.15}{\ignorespaces The \textbf  {predicts} mini-batch has 4 samples, each prediction has 10 classes. This figure indicates the predictions after applying softmax function which are stored in \textbf  {output\_probs} variables.}}{14}{figure.1.15}\protected@file@percent }
+\newlabel{fig:softmax}{{1.15}{14}{The \textbf {predicts} mini-batch has 4 samples, each prediction has 10 classes. This figure indicates the predictions after applying softmax function which are stored in \textbf {output\_probs} variables}{figure.1.15}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1.16}{\ignorespaces Ground truth index by the \textbf  {labels}}}{14}{figure.1.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.17}{\ignorespaces Match the probabilities with the ground truth indeces by \textbf  {true\_class\_probs}. Remind that when the obtained values are also the ones that have the highest probability then they are the correct prediction, elsewhere they would be the failed prediction.}}{15}{figure.1.17}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1.18}{\ignorespaces Cross entropy loss}}{15}{figure.1.18}\protected@file@percent }
+\newlabel{eq:cross}{{1.29}{15}{Cross-Entropy loss}{equation.1.4.29}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.5}Dice loss}{15}{subsection.1.4.5}\protected@file@percent }
+\newlabel{eq:dice}{{1.31}{15}{Dice loss}{equation.1.4.31}{}}
+\newlabel{lst:dice}{{1.2}{16}{Dice loss calculating}{lstlisting.1.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1.2}Dice loss calculating}{16}{lstlisting.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.6}Focal loss}{17}{subsection.1.4.6}\protected@file@percent }
+\newlabel{lst:focal}{{1.3}{17}{Focal loss calculating}{lstlisting.1.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1.3}Focal loss calculating}{17}{lstlisting.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.7}Triplet loss}{18}{subsection.1.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {1.4.8}Tversky loss}{18}{subsection.1.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.5}Proved of equation in backpropagation}{18}{section.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {2}Convolutional Neural Network (CNN)}{19}{chapter.2}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {2.1}Convolutional Neural Network}{15}{section.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Vectorized convolution by Im2col and col2im}{15}{subsection.2.1.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Convolution operation between $7\times 7$ input and $3\times 3$ kernel filter with $stride=1$. If we use a loop then each iteration we slide over a $3\times 3$ subgrid of input, we have to do9 multiplications and 8 addition. The number operations we have to do is $9\times 8\times 25=1800$ operations for 1 convolution. Remind that with this looping implementation, we can only do $9\times 8=72$ operations sequentially.}}{16}{figure.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Step1: Image to Column (Im2Col) operation is to sort all values in convolutional kernel in a column}}{17}{figure.2.2}\protected@file@percent }
-\newlabel{fig:im2col}{{2.2}{17}{Step1: Image to Column (Im2Col) operation is to sort all values in convolutional kernel in a column}{figure.2.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces The output Im2col in 3-channels image}}{17}{figure.2.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Reshape the kernel to row vector form. Given there are N kernels, then the reshaped kernels set will have the concatenated row vectors}}{18}{figure.2.4}\protected@file@percent }
-\newlabel{fig:reshaped_kernels}{{2.4}{18}{Reshape the kernel to row vector form. Given there are N kernels, then the reshaped kernels set will have the concatenated row vectors}{figure.2.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Reshape kernel in 3-channels }}{18}{figure.2.5}\protected@file@percent }
-\newlabel{fig:reshaped_kernels_3_channels}{{2.5}{18}{Reshape kernel in 3-channels}{figure.2.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrix multiplication operation between reshaped kernels and Im2Col output. The output of this operation will be reshaped to the expected form as the same as after convolution.}}{18}{figure.2.6}\protected@file@percent }
-\newlabel{fig:matrix_multiplication}{{2.6}{18}{Matrix multiplication operation between reshaped kernels and Im2Col output. The output of this operation will be reshaped to the expected form as the same as after convolution}{figure.2.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2.1}Convolutional Neural Network}{19}{section.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.1}Vectorized convolution by Im2col and col2im}{19}{subsection.2.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Convolution operation between $7\times 7$ input and $3\times 3$ kernel filter with $stride=1$. If we use a loop then each iteration we slide over a $3\times 3$ subgrid of input, we have to do9 multiplications and 8 addition. The number operations we have to do is $9\times 8\times 25=1800$ operations for 1 convolution. Remind that with this looping implementation, we can only do $9\times 8=72$ operations sequentially.}}{20}{figure.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Step1: Image to Column (Im2Col) operation is to sort all values in convolutional kernel in a column}}{21}{figure.2.2}\protected@file@percent }
+\newlabel{fig:im2col}{{2.2}{21}{Step1: Image to Column (Im2Col) operation is to sort all values in convolutional kernel in a column}{figure.2.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces The output Im2col in 3-channels image}}{21}{figure.2.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Reshape the kernel to row vector form. Given there are N kernels, then the reshaped kernels set will have the concatenated row vectors}}{22}{figure.2.4}\protected@file@percent }
+\newlabel{fig:reshaped_kernels}{{2.4}{22}{Reshape the kernel to row vector form. Given there are N kernels, then the reshaped kernels set will have the concatenated row vectors}{figure.2.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Reshape kernel in 3-channels }}{22}{figure.2.5}\protected@file@percent }
+\newlabel{fig:reshaped_kernels_3_channels}{{2.5}{22}{Reshape kernel in 3-channels}{figure.2.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Matrix multiplication operation between reshaped kernels and Im2Col output. The output of this operation will be reshaped to the expected form as the same as after convolution.}}{22}{figure.2.6}\protected@file@percent }
+\newlabel{fig:matrix_multiplication}{{2.6}{22}{Matrix multiplication operation between reshaped kernels and Im2Col output. The output of this operation will be reshaped to the expected form as the same as after convolution}{figure.2.6}{}}
 \abx@aux@read@bbl@mdfivesum{EE04F40F768DAEED26442158E95ABA61}
-\gdef \@abspage@last{19}
+\gdef \@abspage@last{23}

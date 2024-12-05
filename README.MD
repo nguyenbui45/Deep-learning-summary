@@ -1,4 +1,4 @@
-Summary some fundamental elements that need to be concretely comprehended for deep learning reseacher.\\
+Summary some fundamental elements that need to be concretely comprehended for deep learning reseacher.
 
 Sources of referencing that I have used:
 + (Book) Deep learning by Ian Goodfellow, Yoshua Bengio and Aaron Courville (https://www.deeplearningbook.org/)
