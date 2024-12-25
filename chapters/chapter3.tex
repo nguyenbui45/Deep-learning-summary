@@ -1,0 +1,73 @@
+\section{Introduce common datatype in deep learning}
+In programming, variables are stored under a certain capacity that requires consistent precision in order to avoid loss in actions. For example, for positive integer computation, we would like to use at least \textit{uint8} type to store the output with maximum value $255$ but we can also use \textit{int16}, \textit{int32}, \textit{int64} to store larger maximum values. However, when it comes to real values (in mathematical manner), rounding loss is unavoidable since irrational number doesn't have its end so we must accept a threshold that allow the computational output doesn't mismatch with expected result at a certain degree. In machine learning, most of dataset type will be casted under floating point with either following options: \textit{float32}, \textit{float16}, \textit{bfloat16}.\newline
+
+\noindent
+Type \textit{float32} also known as \textit{single precision or full precision} can represent a wide range of real values with 1 sign bit, 8 exponent bits and 23 mantissa bits. Since many hardwares nowadays consider \textit{float32} as a standard to measure processing power, it has been used widely in not only deep leanring but also in computer graphics as well. Two disadvatages that need to be mentioned for \textit{float32} are (1) high memory footprint and (2) slow dues to more operations.\newline
+
+\noindent
+Type \textit{float16} also known as \textit{half precision} is a clipping version of \textit{float32} since it can represent well floating point numbers within range $[-65504,65504]$ decimal precision estimated around 3 digits after floating point. Compared to \textit{float32}, this type only has 5 exponent bits and 11 mantissa bits, making it less expressive for significant values. Normally, \textit{float16} is preferred in edge devices when launching deep learning dues to its efficiency and memory-saving.\newline 
+
+\noindent
+Type \textit{bfloat16} is a special idea that was developed by Google Brain team in an effort to accelerate matrix multiplication operations on cloud TPUs platform~\cite{bfloat}. In fact, \textit{bfloat16} compromises 2 factors (1) \ul{the total number of bits used} of \textit{float16} and (2) \ul{exponent bits} of \textit{float32}, e.g 8 over 16 bits are obtained for representing exponent values. According to their article~\cite{bfloat}, neural network is more sensitive with exponent than mantissa so it's better to prioritize exponent bits when training deep learning.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        & sign bit & exponent bits & mantissa bits & decimal precision\\
+        \hline
+        \textit{float32} & 1 & 8 & 23 & $\approx 3$\\
+        \hline
+        \textit{float16} & 1 & 5 & 11 & $\approx 7$\\
+        \hline
+        \textit{bfloat16} & 1 & 8 & 7 & $\approx 7$\\
+        \hline
+    \end{tabular}
+    \caption{Summary of common types used in deep learning training \& inference}
+    \label{tab:types}
+\end{table}
+
+\lstinputlisting[language=Python,caption={Code illustrates float16 and float32 type}]{codes/type.py}
+
+\section{Weight quantization}
+When a deep learning model is saved, its size will depend on the number of parameters and the data types to store those values. Regarding state-of-art image models and LLMs nowadays, they possess at least hundread millions to billions of params in order to perform well in specific tasks. Therefore, in the case we want to downgrade the size of the model just enough to be launched on local devices instead of calling APIs provided by any datacenter service, it is preferable to modify the data types that used to store params values through a phase called "quantization". According to~\cite{weight_quantization}, there are 2 quantization families:
+\begin{itemize}
+    \item \textbf{Post-training quantization}: convert the numerical results of training process to a lower precision type. For example, the original LLama v3.2 11B model costs about 2 Gb when using full precision but after post-training quantization with half precision, the size of the model can be reduced by half which enough to run on edge device like Jetson Nano.
+    \item \textbf{Quantization-aware training}: convert the weights and bias during pre-training or fine-tuning. For example: during forward pass the computation can adopt float16 type to reduce the precision but in backward pass and weight update, the outputs are stored under float32 to preserve the precision. 
+\end{itemize}
+
+\subsection{Post-training quantization}
+Nowadays, many companies and organizations decided to public not only the weights but also the model source codes for reseachers, users if one may interests with launching/finetuning the state-of-art models on their local devices. However, these individuals are less likely to possess thousands of A100 GPUs running parallelly in their house, or at least to generate text for local GPT with 1000 tokens per minute so except your goal is for research or business, it is inefficient to run these models locally. As a matter of fact, when the absolute perfomance in terms of speed and accuracy of the model is not the priority, we can try to make the model run at a lower precision setting with approximate quality as original one by quantizing the weight datatype. From \textit{float32} precision, we can convert the model to \textit{float16} without severely damage the pretrained weights but it isn't really shrink the size significantly. For a higher degree of quantization, we consider \textbf{8 bit quantization} and \textbf{4 bit quantization} with 2 techniques: absolute maximum and zero-point quantization.\newline
+
+\textbf{Absolute maximum 8 bit quantizer}\newline
+\begin{equation}
+    X_{quant} = round \left( \frac{127}{max[X]}*X \right)  
+\end{equation}
+where 127 is the maximum value of \textit{int8} type. The reverse equation from \textit{int8} to \textit{float16, float32} is:
+\begin{equation}
+    X_{dequant} =  \frac{max[X]}{127}*X_{quant}
+\end{equation}
+Explain: we calculate the scale of maximum value of \textit{int8} type over the maximum entries of absolute weight, then multiplies this scale to all the weight entries.\newline
+
+\lstinputlisting[language=Python,caption={Code for absolute maximum quantization}]{codes/abs_max.py}
+
+\noindent
+\textbf{Zero-point quantization}\newline\noindent
+First we need to calculate the scale dues to the assumption that the input value range distribute asymetrically. Then we find the zero point that offset the input to $[-128,127]$ range of \textit{int8}.
+\begin{equation}
+    scale = \frac{255}{max(X) - min(X)}
+\end{equation}
+\begin{equation}
+    zeropoint = -round(scale*min(X)) - 128
+\end{equation}
+The quantized outputs will be computed by multiplying input with the scale and add the zero point.
+\begin{equation}
+    X_{quant} = round(scale*X + zeropoint)
+\end{equation}
+
+\begin{equation}
+    X_{dequant} = \frac{X_{quant} - zeropoint}{scale}
+\end{equation}
+
+\lstinputlisting[language=Python,caption={Code for zero point quantization}]{codes/zeropoint.py}
+\subsection{Quantization-aware training}

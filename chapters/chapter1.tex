@@ -889,7 +889,7 @@ Example: A $200\times200$ medical image is used to predict the tumor of human br
 \Rightarrow\text{Dice loss} &= 1 - \frac{0.944 + 0.625}{2} = 0.2155 
 \end{align*}
 
-\lstinputlisting[language=Python,caption={Dice loss calculating},label={lst:dice}]{codes/dice.py}
+\lstinputlisting[language=Python,caption={Multi classes Dice loss calculation},label={lst:dice}]{codes/dice.py}
 \subsection{Focal loss}
 
 First, with the estimated probability of the model for the class $y=1$, we denote the general case for any $y \in{0,1}$ as follow:
@@ -921,5 +921,28 @@ We observe that for the hard case, there is more room for the loss to continousl
 \subsection{Triplet loss}
 d
 \subsection{Tversky loss}
-d
+
+
+\section{Metrics}
+While loss function plays an essential role in deeplearning optimization, it also provides the sense of how good the model is learning through batches. Nevertheless, loss function is not always be able to indicate the quantitative perspective of the model's performance, especially in such case requires the model to focus in a more prioritized class than others. For example, in pathological cancer staging classification, the prize of precisely predicting stage 0 must be much lesser than predicting stage 2 since the number of samples that have positive in stage 2 is as not comparable as healthy samples.
+In this section, we would like to categorized the metrics types according to the output format of the task.
+\subsection{Metrics for classification}
+
+\subsubsection{Accuracy}
+\subsubsection{Recall}
+\subsubsection{Precision}
+\subsubsection{F1 score}
+
+\subsubsection{Sensitivity}
+
+\subsubsection{Specificity}
+
+\subsubsection{Positive predicted value (PPV)/ Negative predicted value (NPV)}
+
+\subsubsection{Received Operating Characteristic (ROC)}
+
+\subsubsection{Precision-Recall curve}
+
+\subsubsection{Confidence Interval (CI)}
+
 \section{Proved of equation in backpropagation}

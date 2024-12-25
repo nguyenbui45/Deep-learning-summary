@@ -16,5 +16,54 @@
   {}
 \endgroup
 
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{weight_quantization}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=28df85c61dba1b085476dddcdce3fc55}{%
+           family={Bowen},
+           familyi={B\bibinitperiod},
+           given={Aisuko},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{28df85c61dba1b085476dddcdce3fc55}
+      \strng{fullhash}{28df85c61dba1b085476dddcdce3fc55}
+      \strng{bibnamehash}{28df85c61dba1b085476dddcdce3fc55}
+      \strng{authorbibnamehash}{28df85c61dba1b085476dddcdce3fc55}
+      \strng{authornamehash}{28df85c61dba1b085476dddcdce3fc55}
+      \strng{authorfullhash}{28df85c61dba1b085476dddcdce3fc55}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.kaggle.com/code/aisuko/introduction-to-weight-quantization}}
+      \field{title}{Introduction to Weight Quantization}
+      \field{year}{2024}
+    \endentry
+    \entry{bfloat}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=f8405ac921603f22616dab4d001e4ba8}{%
+           family={Shibo\bibnamedelima Wange},
+           familyi={S\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={Pankaj\bibnamedelima Kanwar},
+           giveni={P\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{f8405ac921603f22616dab4d001e4ba8}
+      \strng{fullhash}{f8405ac921603f22616dab4d001e4ba8}
+      \strng{bibnamehash}{f8405ac921603f22616dab4d001e4ba8}
+      \strng{authorbibnamehash}{f8405ac921603f22616dab4d001e4ba8}
+      \strng{authornamehash}{f8405ac921603f22616dab4d001e4ba8}
+      \strng{authorfullhash}{f8405ac921603f22616dab4d001e4ba8}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://cloud.google.com/blog/products/ai-machine-learning/bfloat16-the-secret-to-high-performance-on-cloud-tpus}}
+      \field{title}{BFloat16: The secret to high performance on Cloud TPUs}
+      \field{year}{2019}
+    \endentry
+  \enddatalist
+\endrefsection
 \endinput
 
